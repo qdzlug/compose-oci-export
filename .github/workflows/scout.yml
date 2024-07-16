@@ -9,13 +9,12 @@ on:
     branches: [ "**" ]
   workflow_dispatch:
 
-
 env:
   REGISTRY: docker.io
   IMAGE_NAME: ${{ github.repository }}
   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
   COMPARE_TAG: latest
-  DOCKER_NAMESPACE: jasonschmidt617
+  DOCKER_NAMESPACE: your-namespace
 
 jobs:
   build:
@@ -55,7 +54,7 @@ jobs:
             type=edge,branch=$repo.default_branch
             type=semver,pattern=v{{version}}
             type=sha,prefix=,suffix=,format=short
-      
+
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v4.0.0
